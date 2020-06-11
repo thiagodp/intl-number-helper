@@ -1,0 +1,45 @@
+{
+  "name": "intl-number-helper",
+  "version": "0.1.0",
+  "description": "Configure Intl.NumberFormat with a string pattern",
+  "keywords": [
+    "intl",
+    "number",
+    "format",
+    "currency",
+    "locale",
+    "i18n",
+    "l10n",
+    "javascript",
+    "typescript",
+    "country",
+    "iso"
+  ],
+  "author": "Thiago Delgado Pinto <thiago-dp@bol.com.br>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thiagodp/intl-number-helper/issues"
+  },
+  "homepage": "https://github.com/thiagodp/intl-number-helper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagodp/intl-number-helper.git"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "all": "jest && tsc",
+    "preversion": "jest && tsc",
+    "postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "currency-code-map": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0",
+    "typescript": "^3.9.5"
+  }
+}
