@@ -46,6 +46,8 @@ Some polyfills for `Intl.NumberFormat`:
 - [@formatjs/intl-numberformat](https://formatjs.io/docs/polyfills/intl-numberformat) - Browsers and NodeJS (_recommended_)
 - [Intl.js](https://github.com/andyearnshaw/Intl.js/) - Browsers and NodeJS
 
+> Although NodeJS offers support to `Intl.NumberFormat` from version `10`, a polyfill like formatjs' is recommended, since it is more complete and correct.
+
 ## API
 
 ```typescript
