@@ -36,7 +36,8 @@ npm i intl-number-helper
 Notes:
 - It does not polyfill `Intl.NumberFormat` (_you can use your own polyfill if you need it_).
 - ES6/ES2015 and TypeScript.
-- Unit-tested.
+- [Unit-tested](https://github.com/thiagodp/intl-number-helper/blob/master/__tests__/index.spec.ts).
+- [Semantic Versioning](https://semver.org).
 
 Some polyfills for `Intl.NumberFormat`:
 - [@formatjs/intl-numberformat](https://formatjs.io/docs/polyfills/intl-numberformat) - Browsers and NodeJS (_recommended_)
