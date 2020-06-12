@@ -179,7 +179,7 @@ A number between `0` and `21` (inclusive).
 | --------------- | ---------------- |
 | `'.1'`          | `{ minimumFractionDigits: 1 }` |
 | `'.1-2'`        | `{ minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
-| `'#1-2'`        | `{ useGrouping: false, minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
+| `'#.1-2'`       | `{ useGrouping: false, minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
 
 ### significant-range
 
