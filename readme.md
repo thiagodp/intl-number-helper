@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/thiagodp/intl-number-helper.svg?branch=master)](https://travis-ci.org/thiagodp/intl-number-helper)
 [![npm version](https://badge.fury.io/js/intl-number-helper.svg)](https://badge.fury.io/js/intl-number-helper)
+[![Build Status](https://travis-ci.org/thiagodp/intl-number-helper.svg?branch=master)](https://travis-ci.org/thiagodp/intl-number-helper)
+![Coveralls github](https://img.shields.io/coveralls/github/thiagodp/intl-number-helper)
 
 # intl-number-helper
 

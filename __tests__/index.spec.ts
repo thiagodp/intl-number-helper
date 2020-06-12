@@ -1,4 +1,4 @@
-import { makeOptions, formatNumber } from "../src/index";
+import { makeOptions, formatNumber, isPatternCorrect } from "../src/index";
 
 // import { NumberFormat, NumberFormatOptions } from '@formatjs/intl-numberformat';
 
@@ -24,6 +24,12 @@ describe( 'intl-number-helper', () => {
         };
 
         it.each( [
+
+			// wrong pattern returns an empty object
+			[ 'WRONG', undefined, {} ],
+
+			// wrong pattern with additional object returns the object
+			[ 'WRONG', { style: 'decimal' }, { style: 'decimal' } ],
 
             // empty
             [ '', undefined, {} ],
@@ -82,17 +88,17 @@ describe( 'intl-number-helper', () => {
 
     describe( '#formatNumber', () => {
 
-        const nf = ( value: number, locales: string|string[], options: any ): string => {
+        const nf = ( value: number, locales?: string|string[], options?: any ): string => {
             // return ( new NumberFormat( locales, options ) ).format( value );
             return ( new Intl.NumberFormat( locales, options ) ).format( value );
         };
 
         const fn = (
             value: number,
-            locale: string,
-            pattern: string,
-            additionalOptions: any,
-            expected: string
+            locale?: string,
+            pattern?: string,
+            additionalOptions?: any,
+            expected?: string
             ) => {
             const s = formatNumber( value, locale, pattern, additionalOptions );
             expect( s ).toEqual( expected );
@@ -104,6 +110,8 @@ describe( 'intl-number-helper', () => {
 
             // It assumes the default currency (USD) when the country is not defined
 			[ 0, 'en', '$', undefined, nf( 0, 'en', { style: 'currency', currency: 'USD' } ) ],
+            // It assumes the default currency (USD) when the locale is not defined
+			[ 0, undefined, '$', undefined, nf( 0, undefined, { style: 'currency', currency: 'USD' } ) ],
 
             // Currency of BR -> BRL
             [ 0, 'pt-BR', '$', undefined, nf( 0, 'pt-BR', { style: 'currency', currency: 'BRL' } ) ],
@@ -114,6 +122,16 @@ describe( 'intl-number-helper', () => {
 
         ] )( '%s for "%s" with pattern "%s" and %o is "%s"', fn );
 
-    } );
+	} );
+
+
+	describe( '#isPatternCorrect', () => {
+
+		it( 'evaluates an empty string as correct', () => {
+			const r = isPatternCorrect( '' );
+			expect( r ).toBeTruthy();
+		} );
+
+	} );
 
 } );

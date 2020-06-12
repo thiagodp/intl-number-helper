@@ -25,12 +25,16 @@
     "type": "git",
     "url": "git+https://github.com/thiagodp/intl-number-helper.git"
   },
+  "files": [
+    "dist/*"
+  ],
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest",
     "build": "tsc",
-    "all": "jest && tsc",
-    "preversion": "jest && tsc",
+    "test": "jest",
+    "cov": "jest --coverage",
+    "all": "tsc && jest --coverage",
+    "preversion": "npm run all",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
