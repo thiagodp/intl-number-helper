@@ -37,7 +37,6 @@ Notes:
 - It does not polyfill `Intl.NumberFormat` (_you can use your own polyfill if you need it_).
 - ES6/ES2015 and TypeScript.
 - Unit-tested.
-- Semantic Versioning.
 
 Some polyfills for `Intl.NumberFormat`:
 - [@formatjs/intl-numberformat](https://formatjs.io/docs/polyfills/intl-numberformat) - Browsers and NodeJS (_recommended_)
@@ -119,7 +118,7 @@ console.log( formatNumber( 123456, 'en-US', 'u',
 
 ## Patterns
 
-Pattern is `symbol sign integer-digits grouping fraction-range significant-range`, in this order.
+Pattern is `symbol grouping sign integer-digits fraction-range significant-range`, in this order.
 
 Every part is **optional**.
 
@@ -143,14 +142,21 @@ Every part is **optional**.
 
 Note: `%` makes the value be divided by 10. That's a behavior from `Intl.NumberFormat`.
 
+### grouping
+
+| Pattern example | Generated object |
+| --------------- | ---------------- |
+| `''`            | `{}`, which is the same as `{ useGrouping: true }` (default value) |
+| `'#'`           | `{ useGrouping: false }` |
+
 ### sign
 
 | Pattern example | Generated object |
 | --------------- | ---------------- |
-| `''` (empty) | `{}`, which is the same as `{ signDisplay: 'auto' }` (default value) |
-| `'+'` | `{ signDisplay: 'exceptZero' }` |
-| `'!'` | `{ signDisplay: 'never' }` |
-| `'@'` | `{ signDisplay: 'always' }` |
+| `''` (empty)    | `{}`, which is the same as `{ signDisplay: 'auto' }` (default value) |
+| `'+'`           | `{ signDisplay: 'exceptZero' }` |
+| `'!'`           | `{ signDisplay: 'never' }` |
+| `'@'`           | `{ signDisplay: 'always' }` |
 
 
 ### integer-digits
@@ -161,26 +167,18 @@ A number between `0` and `21` (inclusive).
 | --------------- | ---------------- |
 | `'7'`           | `{ minimumIntegerDigits: 7 }` |
 
-### grouping
-
-| Pattern example | Generated object |
-| --------------- | ---------------- |
-| `'.'`           | `{}`, which is the same as `{ useGrouping: true }` (default value) |
-| `'#'`           | `{ useGrouping: false }` |
-
 ### fraction-range
 
-- It can establish minimum or maximum digits (or both) for the fraction part.
-- It must be preceded by a `grouping` pattern, that is, `.` or `#`.
-- Use `:` to separate values (numbers).
+- It establishes the minimum and the maximum digits for the fraction part.
+- It must be preceded by `.` and use `-` to separate the values (numbers).
+- The minimum part is always informed.
 - Every number must be between `1` and `20` (inclusive).
 
 | Pattern example | Generated object |
 | --------------- | ---------------- |
-| `'.1'`   | `{ minimumFractionDigits: 1 }` |
-| `'.:2'`  | `{ maximumFractionDigits: 2 }` |
-| `'.1:2'` | `{ minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
-| `'#1:2'` | `{ minimumFractionDigits: 1, maximumFractionDigits: 2, useGrouping: false }` |
+| `'.1'`          | `{ minimumFractionDigits: 1 }` |
+| `'.1-2'`        | `{ minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
+| `'#1-2'`        | `{ useGrouping: false, minimumFractionDigits: 1, maximumFractionDigits: 2 }` |
 
 ### significant-range
 
@@ -188,20 +186,19 @@ A number between `0` and `21` (inclusive).
 
 | Pattern example | Generated object |
 | --------------- | ---------------- |
-| `';1'`   | `{ minimumSignificantDigits: 1 }` |
-| `';:2'`  | `{ maximumSignificantDigits: 2 }` |
-| `';1:2'` | `{ minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
-| `'#;1:2'` | `{ minimumSignificantDigits: 1, maximumSignificantDigits: 2, useGrouping: false }` |
+| `';1'`          | `{ minimumSignificantDigits: 1 }` |
+| `';1-2'`        | `{ minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
+| `'#;1-2'`       | `{ useGrouping: false, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
 
 ## More examples
 
 > Putting some patterns together
 
-| Pattern example | Generated object |
+| Pattern&nbsp;example | Generated object |
 | --------------- | ---------------- |
-| `'$7.:2'` | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2 }` |
-| `'$7.:2;2'` | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 2 }` |
-| `'$+7.:2;2'` | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 2, signDisplay: 'exceptZero' }` |
+| `'$7.2-2'`      | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 2, maximumFractionDigits: 2 }` |
+| `'$7.2-2;2'`    | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 2, maximumFractionDigits: 2, minimumSignificantDigits: 2 }` |
+| `'$+7.2-2;1-2'` | `{ style: 'currency', currencyDisplay: 'symbol', signDisplay: 'exceptZero', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
 
 ## To-Do
 

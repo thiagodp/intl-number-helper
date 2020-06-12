@@ -41,7 +41,10 @@ describe( 'intl-number-helper', () => {
             [ 'e', undefined, { notation: 'engineering' } ],
             [ 'c', undefined, { notation: 'compact' } ],
             [ 'l', undefined, { notation: 'compact', compactDisplay: 'long' } ],
-            [ 's', undefined, { notation: 'compact', compactDisplay: 'short' } ],
+			[ 's', undefined, { notation: 'compact', compactDisplay: 'short' } ],
+
+            // grouping
+            [ '#', undefined, { useGrouping: false } ],
 
             // sign
             [ '+', undefined, { signDisplay: 'exceptZero' } ],
@@ -52,30 +55,25 @@ describe( 'intl-number-helper', () => {
             [ '0', undefined, { minimumIntegerDigits: 0 } ],
             [ '21', undefined, { minimumIntegerDigits: 21 } ],
 
-            // grouping
-            [ '.', undefined, {} ],
-            [ '#', undefined, { useGrouping: false } ],
-
             // fraction-range
             [ '.1', undefined, { minimumFractionDigits: 1 } ],
-            [ '.:2', undefined, { maximumFractionDigits: 2 } ],
-            [ '.1:2', undefined, { minimumFractionDigits: 1, maximumFractionDigits: 2 } ],
-            [ '#1:2', undefined, { minimumFractionDigits: 1, maximumFractionDigits: 2, useGrouping: false } ],
+            [ '.1-2', undefined, { minimumFractionDigits: 1, maximumFractionDigits: 2 } ],
 
             // significant-range
             [ ';1', undefined, { minimumSignificantDigits: 1 } ],
-            [ ';:2', undefined, { maximumSignificantDigits: 2 } ],
-            [ ';1:2', undefined, { minimumSignificantDigits: 1, maximumSignificantDigits: 2 } ],
-            [ '#;1:2', undefined, { minimumSignificantDigits: 1, maximumSignificantDigits: 2, useGrouping: false } ],
+            [ ';1-2', undefined, { minimumSignificantDigits: 1, maximumSignificantDigits: 2 } ],
+            [ '#;1-2', undefined, { useGrouping: false, minimumSignificantDigits: 1, maximumSignificantDigits: 2 } ],
 
             // Additional options
             [ '', { currency: 'USD' }, { currency: 'USD' } ],
             [ '$', { currency: 'USD' }, { style: 'currency', currencyDisplay: 'symbol', currency: 'USD' } ],
 
-            // More examples
-            [ '$7.:2', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2 } ],
-            [ '$7.:2;2', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 2 } ],
-            [ '$+7.:2;2', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 2, signDisplay: 'exceptZero' } ],
+			// More examples
+			[ '$7.1', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 1 } ],
+            [ '$7.1-2', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 1, maximumFractionDigits: 2 } ],
+            [ '$7.1-2;1', undefined, { style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 1, maximumFractionDigits: 2, minimumSignificantDigits: 1 } ],
+			[ '$+7.1-2;1-2', undefined, { style: 'currency', currencyDisplay: 'symbol', signDisplay: 'exceptZero', minimumIntegerDigits: 7, minimumFractionDigits: 1, maximumFractionDigits: 2, minimumSignificantDigits: 1, maximumSignificantDigits: 2 } ],
+			[ '$#+7.1-2;1-2', undefined, { style: 'currency', currencyDisplay: 'symbol', useGrouping: false, signDisplay: 'exceptZero', minimumIntegerDigits: 7, minimumFractionDigits: 1, maximumFractionDigits: 2, minimumSignificantDigits: 1, maximumSignificantDigits: 2 } ],
 
         ] )( 'Pattern "%s" + %o = %o', fn );
 
@@ -100,11 +98,13 @@ describe( 'intl-number-helper', () => {
             expect( s ).toEqual( expected );
         };
 
+		// Results are compared to those produced with Intl.NumberFormat
         it.each( [
             [ 0, 'en', '', undefined, nf( 0, 'en', {} ) ],
 
-            // Default currency
-            [ 0, 'en', '$', undefined, nf( 0, 'en', { style: 'currency', currency: 'USD' } ) ],
+            // It assumes the default currency (USD) when the country is not defined
+			[ 0, 'en', '$', undefined, nf( 0, 'en', { style: 'currency', currency: 'USD' } ) ],
+
             // Currency of BR -> BRL
             [ 0, 'pt-BR', '$', undefined, nf( 0, 'pt-BR', { style: 'currency', currency: 'BRL' } ) ],
             [ 9_999_999, 'pt-BR', '$', undefined, nf( 9_999_999, 'pt-BR', { style: 'currency', currency: 'BRL' } ) ],

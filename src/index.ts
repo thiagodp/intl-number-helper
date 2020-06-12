@@ -27,7 +27,7 @@ interface NumberFormatOptions {
 }
 
 // Try it on https://regex101.com
-const regex = /^([$d%u$wnoaEecls])?(?: |\\t)*([+!@])?([0-9]{0,2})([\.#]?)([0-9]{0,2})(?:\:([0-9]{0,2}))?(?:\;([0-9]{0,2})?(?:\:([0-9]{0,2}))?)?$/;
+const regex = /^([$d%u$wnoaEecls])?(?: |\\t)*(\#?)(?: |\\t)*([+!@])?([0-9]{0,2})(?:\.([0-9]{0,2})(?:\-([0-9]{0,2}))?)?(?:\;([0-9]{0,2})(?:\-([0-9]{0,2}))?)?$/;
 
 /**
  * Indicates if the given pattern is correct.
@@ -61,17 +61,21 @@ export function makeOptions(
 
     const [
         /* fullMatch */,
-        style,
+		style,
+		grouping,
         sign,
         minimumIntegerDigits,
-        grouping,
         minimumFractionDigits,
         maximumFractionDigits,
         minimumSignificantDigits,
         maximumSignificantDigits,
     ] = r;
 
-    let obj: NumberFormatOptions = objectFromStyle( style );
+	let obj: NumberFormatOptions = objectFromStyle( style );
+
+    if ( '#' === grouping ) {
+        obj.useGrouping = false;
+    }
 
     if ( '+' === sign ) {
         obj.signDisplay = 'exceptZero';
@@ -83,10 +87,6 @@ export function makeOptions(
 
     if ( minimumIntegerDigits ) {
         obj.minimumIntegerDigits = Number( minimumIntegerDigits );
-    }
-
-    if ( '#' === grouping ) {
-        obj.useGrouping = false;
     }
 
     if ( minimumFractionDigits ) {

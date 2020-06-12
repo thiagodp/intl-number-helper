@@ -1,6 +1,6 @@
 import { currencyFromLocale } from "./locale";
 // Try it on https://regex101.com
-const regex = /^([$d%u$wnoaEecls])?(?: |\\t)*([+!@])?([0-9]{0,2})([\.#]?)([0-9]{0,2})(?:\:([0-9]{0,2}))?(?:\;([0-9]{0,2})?(?:\:([0-9]{0,2}))?)?$/;
+const regex = /^([$d%u$wnoaEecls])?(?: |\\t)*(\#?)(?: |\\t)*([+!@])?([0-9]{0,2})(?:\.([0-9]{0,2})(?:\-([0-9]{0,2}))?)?(?:\;([0-9]{0,2})(?:\-([0-9]{0,2}))?)?$/;
 /**
  * Indicates if the given pattern is correct.
  *
@@ -26,8 +26,11 @@ export function makeOptions(pattern, additionalOptions) {
         return {};
     }
     const [
-    /* fullMatch */ , style, sign, minimumIntegerDigits, grouping, minimumFractionDigits, maximumFractionDigits, minimumSignificantDigits, maximumSignificantDigits,] = r;
+    /* fullMatch */ , style, grouping, sign, minimumIntegerDigits, minimumFractionDigits, maximumFractionDigits, minimumSignificantDigits, maximumSignificantDigits,] = r;
     let obj = objectFromStyle(style);
+    if ('#' === grouping) {
+        obj.useGrouping = false;
+    }
     if ('+' === sign) {
         obj.signDisplay = 'exceptZero';
     }
@@ -39,9 +42,6 @@ export function makeOptions(pattern, additionalOptions) {
     }
     if (minimumIntegerDigits) {
         obj.minimumIntegerDigits = Number(minimumIntegerDigits);
-    }
-    if ('#' === grouping) {
-        obj.useGrouping = false;
     }
     if (minimumFractionDigits) {
         obj.minimumFractionDigits = Number(minimumFractionDigits);
