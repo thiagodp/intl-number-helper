@@ -32,7 +32,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "cov": "jest --coverage && coveralls < coverage/lcov.info",
+    "cov": "jest --coverage",
+    "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "all": "npm run build && npm run cov",
     "preversion": "npm run all",
     "postversion": "git push && git push --tags"
