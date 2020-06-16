@@ -37,7 +37,7 @@
   "scripts": {
     "clean": "del \"index*.js\" \"*.map\" \"*.d.ts\" ",
     "prebuild": "npm run clean",
-    "build": "microbundle --globals country-to-currency=countryToCurrency",
+    "build": "microbundle --globals country-to-currency=countryToCurrency --external none",
     "pretest": "npm run clean",
     "test": "jest",
     "precov": "npm run clean",
@@ -48,11 +48,10 @@
     "preversion": "npm run all",
     "postversion": "git push && git push --tags"
   },
-  "dependencies": {
-    "country-to-currency": "^1.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.0",
+    "country-to-currency": "^1.0.2",
     "coveralls": "^3.1.0",
     "del-cli": "^3.0.1",
     "jest": "^26.0.1",

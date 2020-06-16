@@ -36,7 +36,7 @@ npm i intl-number-helper
 
 Notes:
 - It does not polyfill `Intl.NumberFormat` (_you can use your own polyfill if you need it_).
-- Use it in the browser, NodeJS or DenoJS (available from `v1.0.2´ on), with JavaScript 5+ and TypeScript.
+- Use it in the browser, NodeJS or DenoJS, with JavaScript 5+ and TypeScript.
 - [Unit-tested](https://github.com/thiagodp/intl-number-helper/blob/master/__tests__/index.spec.ts).
 - [Semantic Versioning](https://semver.org).
 
