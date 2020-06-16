@@ -35,11 +35,16 @@
   "module": "index.esm.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "microbundle",
+    "clean": "del \"index*.js\" \"*.map\" \"*.d.ts\" ",
+    "prebuild": "npm run clean",
+    "build": "microbundle --globals country-to-currency=countryToCurrency",
+    "pretest": "npm run clean",
     "test": "jest",
+    "precov": "npm run clean",
     "cov": "jest --coverage",
+    "precoveralls": "npm run clean",
     "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
-    "all": "npm run build && npm run cov",
+    "all": "npm run cov && npm run build",
     "preversion": "npm run all",
     "postversion": "git push && git push --tags"
   },
@@ -49,6 +54,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.0",
     "coveralls": "^3.1.0",
+    "del-cli": "^3.0.1",
     "jest": "^26.0.1",
     "microbundle": "^0.12.1",
     "ts-jest": "^26.1.0",

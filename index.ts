@@ -1,4 +1,6 @@
-import countryToCurrency from 'country-to-currency';
+import * as countryToCurrency from 'country-to-currency';
+// import countryToCurrency from 'country-to-currency';
+// const countryToCurrency = require( 'country-to-currency' );
 
 // @see https://tc39.es/ecma402/#sec-properties-of-intl-numberformat-instances
 
@@ -212,8 +214,11 @@ export function formatNumber(
  * @param locale Locale
  */
 export function currencyFromLocale( locale: string ): string | null {
-    const loc = extractCountryCode( locale );
-    return loc ? countryToCurrency[ loc ] || null : null;
+	const loc = extractCountryCode( locale );
+	if ( ! loc || ! countryToCurrency ) {
+		return null;
+	}
+    return countryToCurrency[ loc ] || null;
 }
 
 /**
