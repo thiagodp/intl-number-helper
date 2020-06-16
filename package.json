@@ -26,11 +26,16 @@
     "url": "git+https://github.com/thiagodp/intl-number-helper.git"
   },
   "files": [
-    "dist/*"
+    "index.*"
   ],
-  "main": "dist/index.js",
+  "source": "index.ts",
+  "main": "index.js",
+  "browser": "index.umd.js",
+  "unpkg": "index.umd.js",
+  "module": "index.esm.js",
+  "types": "index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "microbundle",
     "test": "jest",
     "cov": "jest --coverage",
     "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
@@ -39,12 +44,13 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "currency-code-map": "^1.0.2"
+    "country-to-currency": "^1.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
     "coveralls": "^3.1.0",
     "jest": "^26.0.1",
+    "microbundle": "^0.12.1",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5"
   }
