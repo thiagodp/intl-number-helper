@@ -48,10 +48,11 @@
     "preversion": "npm run all",
     "postversion": "git push && git push --tags"
   },
-  "dependencies": {},
+  "dependencies": {
+    "country-to-currency": "^1.0.2"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "country-to-currency": "^1.0.2",
     "coveralls": "^3.1.0",
     "del-cli": "^3.0.1",
     "jest": "^26.0.1",
