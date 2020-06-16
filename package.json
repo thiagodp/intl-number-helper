@@ -28,7 +28,7 @@
   "files": [
     "index.*"
   ],
-  "source": "index.ts",
+  "source": "src/index.ts",
   "main": "index.js",
   "browser": "index.umd.js",
   "unpkg": "index.umd.js",

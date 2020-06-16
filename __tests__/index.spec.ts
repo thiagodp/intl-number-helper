@@ -1,4 +1,4 @@
-import { currencyFromLocale, extractCountryCode, formatNumber, isPatternCorrect, makeOptions } from '..';
+import { currencyFromLocale, extractCountryCode, formatNumber, isPatternCorrect, makeOptions } from '../src';
 
 // import { NumberFormat, NumberFormatOptions } from '@formatjs/intl-numberformat';
 
