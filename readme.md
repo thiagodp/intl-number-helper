@@ -36,7 +36,7 @@ npm i intl-number-helper
 
 Notes:
 - It does not polyfill `Intl.NumberFormat` (_you can use your own polyfill if you need it_).
-- ES6/ES2015 and TypeScript.
+- Use it in the browser, NodeJS or DenoJS (available from `v1.0.2´ on), with JavaScript 5+ and TypeScript.
 - [Unit-tested](https://github.com/thiagodp/intl-number-helper/blob/master/__tests__/index.spec.ts).
 - [Semantic Versioning](https://semver.org).
 
@@ -88,6 +88,8 @@ function isPatternCorrect( pattern: string ): boolean;
 
 ## Examples
 
+> ESM, NodeJS
+
 ```typescript
 import { formatNumber } from 'intl-number-helper';
 
@@ -116,6 +118,23 @@ console.log( formatNumber( 0.75, 'en-US', '%' ) );
 console.log( formatNumber( 100, 'en-US', 'u',
     { unit: 'kilometer-per-hour', unitDisplay: 'long' } ) );
 
+```
+
+> Browser
+
+```html
+<script crossorigin src="https://unpkg.com/intl-number-helper" ></script>
+<script>
+  console.log( intlNumberHelper.formatNumber( 123456, 'en-US', 'd' ) );  // 123,456
+</script>
+```
+
+> DenoJS
+
+```typescript
+// Alternatively, use an import map and include it like NodeJS
+import { formatNumber } from "https://unpkg.com/intl-number-helper/index.esm.js";
+console.log( formatNumber( 123456, 'en-US', 'd' ) );  // 123,456
 ```
 
 ## Patterns
@@ -200,9 +219,9 @@ A number between `0` and `21` (inclusive).
 | `'$7.2-2;2'`    | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 2, maximumFractionDigits: 2, minimumSignificantDigits: 2 }` |
 | `'$+7.2-2;1-2'` | `{ style: 'currency', currencyDisplay: 'symbol', signDisplay: 'exceptZero', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
 
-## To-Do
+## What's Next
 
-- To offer support to more patterns.
+- Offering support to more patterns.
 
 Suggestions? Please [open an Issue](https://github.com/thiagodp/intl-number-helper/issues/new). 👍
 
