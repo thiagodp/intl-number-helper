@@ -97,14 +97,11 @@ console.log( formatNumber( 123456, 'en-US', '$' ) );
 // R$ 123.456,00
 console.log( formatNumber( 123456, 'pt-BR', '$7.2' ) );
 
-// US$123,456.00
-console.log( formatNumber( 123456, 'en-US', '$7.2' ) );
-
 // 123,456.00 American dollars
-console.log( formatNumber( 123456, 'en-US', 'n7.2' ) );
+console.log( formatNumber( 123456, 'en-US', 'n' ) );
 
 // 123,456.00
-console.log( formatNumber( 123456, 'en-US', 'd7.2' ) );
+console.log( formatNumber( 123456, 'en-US', 'd.2' ) );
 
 // 123,456
 console.log( formatNumber( 123456, 'en-US', 'd' ) );
@@ -112,8 +109,11 @@ console.log( formatNumber( 123456, 'en-US', 'd' ) );
 // 123456
 console.log( formatNumber( 123456, 'en-US', 'd#' ) );
 
-// 123,456 kilometers per hour
-console.log( formatNumber( 123456, 'en-US', 'u',
+// 75%
+console.log( formatNumber( 0.75, 'en-US', '%' ) );
+
+// 100 kilometers per hour
+console.log( formatNumber( 100, 'en-US', 'u',
     { unit: 'kilometer-per-hour', unitDisplay: 'long' } ) );
 
 ```
@@ -141,8 +141,6 @@ Every part is **optional**.
 | `'c'` | `{ notation: 'compact' }` |
 | `'l'` | `{ notation: 'compact', compactDisplay: 'long' }` |
 | `'s'` | `{ notation: 'compact', compactDisplay: 'short' }` |
-
-Note: `%` makes the value be divided by 10. That's a behavior from `Intl.NumberFormat`.
 
 ### grouping
 
