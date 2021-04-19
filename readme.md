@@ -13,14 +13,7 @@ const options = { style: 'currency', currencyDisplay: 'symbol', currency: 'USD' 
 const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
 ```
 
-You can use `makeOptions`:
-
-```typescript
-const options = makeOptions( '$', { currency: 'USD' } );
-const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
-```
-
-Or even shorter, with `formatNumber`:
+Use `formatNumber`:
 
 ```typescript
 const numberStr = formatNumber( 123456, 'en-US', '$' ); // Guesses the currency code
@@ -72,6 +65,11 @@ function formatNumber(
 
  * @param pattern Pattern. Optional. It generates an empty options object by default.
  * @param additionalOptions Options to be added to those generated from the pattern. Optional. Useful for units.
+ *
+ * @example
+ *  const options = makeOptions( '$', { currency: 'USD' } );
+ *  const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
+ *
  */
 function makeOptions(
     pattern?: string,

@@ -47,6 +47,12 @@ export function isPatternCorrect( pattern: string ): boolean {
  *
  * @param pattern Pattern to transform.
  * @param additionalOptions Additional options to be copied to the resulting object.
+ *
+ * @example
+ * ```typescript
+ * const options = makeOptions( '$', { currency: 'USD' } );
+ * const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
+ * ```
  */
 export function makeOptions(
     pattern: string,
