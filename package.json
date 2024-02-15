@@ -1,6 +1,6 @@
 {
   "name": "intl-number-helper",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "Configure Intl.NumberFormat with a string pattern",
   "keywords": [
     "intl",
@@ -35,9 +35,9 @@
   "module": "index.esm.js",
   "types": "index.d.ts",
   "scripts": {
-    "clean": "del \"*.map\" \"*.d.ts\" \"index*.js\" ",
+    "clean": "npx del *.map *.d.ts index*.js index*.mjs",
     "prebuild": "npm run clean",
-    "build": "microbundle --globals country-to-currency=countryToCurrency --external none",
+    "build": "microbundle --globals country-to-currency=countryToCurrency --external none --no-sourcemap",
     "pretest": "npm run clean",
     "test": "jest",
     "precov": "npm run clean",
@@ -46,14 +46,14 @@
     "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "all": "npm run cov && npm run build",
     "preversion": "npm run all",
-    "postversion": "echo Please do not forget to push the tags and publish the package"
+    "postversion": "echo \"Please don't forget: git push && git push --tags && npm publish\""
   },
   "dependencies": {
     "country-to-currency": "^1.1.5"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
-    "del-cli": "^3.0.1",
+    "del-cli": "^5.1.0",
     "jest": "^26.6.3",
     "microbundle": "^0.15.1",
     "ts-jest": "^26.5.5",
