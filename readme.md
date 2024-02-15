@@ -1,19 +1,21 @@
-[![npm version](https://badge.fury.io/js/intl-number-helper.svg)](https://badge.fury.io/js/intl-number-helper)
-[![Build Status](https://travis-ci.org/thiagodp/intl-number-helper.svg?branch=master)](https://travis-ci.org/thiagodp/intl-number-helper)
-[![Coverage Status](https://coveralls.io/repos/github/thiagodp/intl-number-helper/badge.svg?branch=master)](https://coveralls.io/github/thiagodp/intl-number-helper?branch=master)
+[![npm (tag)](https://img.shields.io/npm/v/intl-number-helper?color=green&label=NPM&style=for-the-badge)](https://github.com/thiagodp/intl-number-helper/releases)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/thiagodp/intl-number-helper/test.yml?style=for-the-badge&color=green)](https://github.com/thiagodp/intl-number-helper/actions)
+[![License](https://img.shields.io/npm/l/intl-number-helper.svg?style=for-the-badge&color=green)](https://github.com/thiagodp/intl-number-helper/blob/master/LICENSE.txt)
+[![npm](https://img.shields.io/npm/dt/intl-number-helper?style=for-the-badge&color=green)](https://www.npmjs.com/package/intl-number-helper)
+[![Coverage Status](https://coveralls.io/repos/github/thiagodp/intl-number-helper/badge.svg?branch=master&style=for-the-badge&color=green)](https://coveralls.io/github/thiagodp/intl-number-helper?branch=master)
 
 # intl-number-helper
 
 > 💰 Configure EcmaScript's [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) with a string pattern
 
-For example, **instead of using**:
+**Instead of using** something like this:
 
 ```typescript
 const options = { style: 'currency', currencyDisplay: 'symbol', currency: 'USD' };
 const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
 ```
 
-Use `formatNumber`:
+**Use** `formatNumber`:
 
 ```typescript
 const numberStr = formatNumber( 123456, 'en-US', '$' ); // Guesses the currency code
@@ -38,51 +40,6 @@ Some polyfills for `Intl.NumberFormat`:
 - [Intl.js](https://github.com/andyearnshaw/Intl.js/) - Browsers and NodeJS
 
 > Although NodeJS offers support to `Intl.NumberFormat` from version `10`, a polyfill like formatjs' is recommended, since it is more complete and correct.
-
-## API
-
-```typescript
-
-/**
- * Formats a number.
- *
- * @param value Value to be formatted.
- * @param locale Locale. When `pattern` uses currency, it guesses the currency from the country code.
- * @param pattern Pattern. Optional. It generates an empty options object by default.
- * @param additionalOptions Options to be added to those generated from the pattern. Optional. Useful for units.
- *
- * @throws Error When
- */
-function formatNumber(
-    value: number,
-    locale: string,
-    pattern?: string,
-    additionalOptions?: Intl.NumberFormatOptions
-): string;
-
-/**
- * Creates a `Intl.NumberFormatOptions` object from a given pattern.
-
- * @param pattern Pattern. Optional. It generates an empty options object by default.
- * @param additionalOptions Options to be added to those generated from the pattern. Optional. Useful for units.
- *
- * @example
- *  const options = makeOptions( '$', { currency: 'USD' } );
- *  const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
- *
- */
-function makeOptions(
-    pattern?: string,
-    additionalOptions?: Intl.NumberFormatOptions
-): Intl.NumberFormatOptions;
-
-/**
- * Indicates if the given pattern is correct.
- *
- * @param pattern Pattern
- */
-function isPatternCorrect( pattern: string ): boolean;
-```
 
 ## Examples
 
@@ -216,6 +173,52 @@ A number between `0` and `21` (inclusive).
 | `'$7.2-2'`      | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 2, maximumFractionDigits: 2 }` |
 | `'$7.2-2;2'`    | `{ style: 'currency', currencyDisplay: 'symbol', minimumIntegerDigits: 7, minimumFractionDigits: 2, maximumFractionDigits: 2, minimumSignificantDigits: 2 }` |
 | `'$+7.2-2;1-2'` | `{ style: 'currency', currencyDisplay: 'symbol', signDisplay: 'exceptZero', minimumIntegerDigits: 7, maximumFractionDigits: 2, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }` |
+
+
+## API
+
+```typescript
+
+/**
+ * Formats a number.
+ *
+ * @param value Value to be formatted.
+ * @param locale Locale. When `pattern` uses currency, it guesses the currency from the country code.
+ * @param pattern Pattern. Optional. It generates an empty options object by default.
+ * @param additionalOptions Options to be added to those generated from the pattern. Optional. Useful for units.
+ *
+ * @throws Error When
+ */
+function formatNumber(
+    value: number,
+    locale: string,
+    pattern?: string,
+    additionalOptions?: Intl.NumberFormatOptions
+): string;
+
+/**
+ * Creates a `Intl.NumberFormatOptions` object from a given pattern.
+
+ * @param pattern Pattern. Optional. It generates an empty options object by default.
+ * @param additionalOptions Options to be added to those generated from the pattern. Optional. Useful for units.
+ *
+ * @example
+ *  const options = makeOptions( '$', { currency: 'USD' } );
+ *  const numberStr = new Intl.NumberFormat( 'en-US', options ).format( 123456 );
+ *
+ */
+function makeOptions(
+    pattern?: string,
+    additionalOptions?: Intl.NumberFormatOptions
+): Intl.NumberFormatOptions;
+
+/**
+ * Indicates if the given pattern is correct.
+ *
+ * @param pattern Pattern
+ */
+function isPatternCorrect( pattern: string ): boolean;
+```
 
 ## What's Next
 
