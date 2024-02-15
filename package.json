@@ -35,7 +35,7 @@
   "module": "index.esm.js",
   "types": "index.d.ts",
   "scripts": {
-    "clean": "del \"index*.js\" \"*.map\" \"*.d.ts\" ",
+    "clean": "del \"*.map\" \"*.d.ts\" \"index*.js\" ",
     "prebuild": "npm run clean",
     "build": "microbundle --globals country-to-currency=countryToCurrency --external none",
     "pretest": "npm run clean",
@@ -46,7 +46,7 @@
     "coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "all": "npm run cov && npm run build",
     "preversion": "npm run all",
-    "postversion": "git push && git push --tags"
+    "postversion": "echo Please do not forget to push the tags and publish the package"
   },
   "dependencies": {
     "country-to-currency": "^1.1.5"
